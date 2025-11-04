@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import { Product } from "@/types/product";
 import { toast } from "@/hooks/use-toast";
+import curtainImage from "@/assets/curtain-product.jpg";
 
 interface ProductDetailPageProps {
   product: Product;
@@ -55,11 +56,17 @@ export const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        {/* Product Image Placeholder */}
-        <div className="aspect-square bg-muted rounded-lg flex items-center justify-center">
-          <p className="text-muted-foreground text-lg">Product Image</p>
+    <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="grid md:grid-cols-2 gap-12 items-start">
+        {/* Product Image */}
+        <div className="sticky top-8">
+          <div className="aspect-square overflow-hidden rounded-lg border border-border bg-muted">
+            <img 
+              src={curtainImage} 
+              alt={product.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
 
         {/* Product Details */}
