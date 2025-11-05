@@ -80,35 +80,36 @@ export const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      <div className="grid md:grid-cols-2 gap-12 items-start">
-        {/* Product Image */}
-        <div className="sticky top-8">
-          <div className="aspect-square overflow-hidden rounded-lg border border-border bg-muted">
-            <img 
-              src={currentImage} 
-              alt={product.title}
-              className={`w-full h-full object-cover transition-opacity duration-300 ${
-                isImageTransitioning ? "opacity-0" : "opacity-100"
-              }`}
-            />
+    <div className="min-h-screen w-full">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
+          {/* Product Image */}
+          <div className="w-full lg:sticky lg:top-8">
+            <div className="aspect-square w-full overflow-hidden rounded-lg border border-border bg-muted shadow-sm">
+              <img 
+                src={currentImage} 
+                alt={product.title}
+                className={`w-full h-full object-cover transition-opacity duration-300 ${
+                  isImageTransitioning ? "opacity-0" : "opacity-100"
+                }`}
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Product Details */}
-        <div className="flex flex-col space-y-6">
-          <div>
-            <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
-            <p className="text-muted-foreground">{product.description}</p>
+          {/* Product Details */}
+          <div className="flex flex-col space-y-4 sm:space-y-6 w-full">
+          <div className="space-y-2">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">{product.title}</h1>
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{product.description}</p>
           </div>
 
           {/* Width Selection */}
-          <div className="space-y-2">
-            <Label htmlFor="width">Width (cm)</Label>
+          <div className="space-y-2 w-full">
+            <Label htmlFor="width" className="text-sm sm:text-base font-medium">Width (cm)</Label>
             <Select
               onValueChange={(value) => setSelectedWidth(Number(value))}
             >
-              <SelectTrigger id="width">
+              <SelectTrigger id="width" className="w-full h-11 sm:h-12">
                 <SelectValue placeholder="Select width" />
               </SelectTrigger>
               <SelectContent>
@@ -122,10 +123,10 @@ export const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
           </div>
 
           {/* Drop Selection */}
-          <div className="space-y-2">
-            <Label htmlFor="drop">Drop</Label>
+          <div className="space-y-2 w-full">
+            <Label htmlFor="drop" className="text-sm sm:text-base font-medium">Drop</Label>
             <Select onValueChange={setSelectedDrop}>
-              <SelectTrigger id="drop">
+              <SelectTrigger id="drop" className="w-full h-11 sm:h-12">
                 <SelectValue placeholder="Select drop" />
               </SelectTrigger>
               <SelectContent>
@@ -140,19 +141,19 @@ export const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 
           {/* Hidden Fabric Panels Info (for dev reference) */}
           {fabricPanels > 0 && (
-            <div className="text-sm text-muted-foreground">
+            <div className="text-xs sm:text-sm text-muted-foreground">
               Calculated fabric panels: {fabricPanels}
             </div>
           )}
 
           {/* Price Display */}
-          <div className="pt-4 border-t border-border">
+          <div className="pt-4 sm:pt-6 border-t border-border">
             {calculatedPrice > 0 ? (
-              <div className="text-3xl font-bold">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold">
                 ${calculatedPrice.toFixed(2)}
               </div>
             ) : (
-              <div className="text-xl text-muted-foreground">
+              <div className="text-lg sm:text-xl text-muted-foreground">
                 Select options to see price
               </div>
             )}
@@ -161,7 +162,7 @@ export const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
           {/* Add to Cart Button */}
           <Button
             size="lg"
-            className="w-full"
+            className="w-full h-12 sm:h-14 text-base sm:text-lg font-semibold"
             onClick={handleAddToCart}
             disabled={!selectedWidth || !selectedDrop}
           >
@@ -169,6 +170,7 @@ export const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
               ? `Add to Cart - $${calculatedPrice.toFixed(2)}`
               : "Add to Cart"}
           </Button>
+          </div>
         </div>
       </div>
     </div>
