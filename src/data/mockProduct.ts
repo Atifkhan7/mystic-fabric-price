@@ -20,11 +20,11 @@ export const mockProduct: Product = {
   ],
   metafields: {
     pricingTable: [
-      { width: 100, fabricPanels: 2, basePrice: 120 },
-      { width: 150, fabricPanels: 3, basePrice: 180 },
-      { width: 200, fabricPanels: 4, basePrice: 240 },
-      { width: 250, fabricPanels: 5, basePrice: 300 },
-      { width: 300, fabricPanels: 6, basePrice: 360 },
+      { width: 100, fabricPanels: 2, basePrice: 120, image: "/src/assets/curtain-100cm.jpg" },
+      { width: 150, fabricPanels: 3, basePrice: 180, image: "/src/assets/curtain-150cm.jpg" },
+      { width: 200, fabricPanels: 4, basePrice: 240, image: "/src/assets/curtain-200cm.jpg" },
+      { width: 250, fabricPanels: 5, basePrice: 300, image: "/src/assets/curtain-250cm.jpg" },
+      { width: 300, fabricPanels: 6, basePrice: 360, image: "/src/assets/curtain-300cm.jpg" },
     ],
     dropOptions: [
       { value: "137cm", priceModifier: 0 },

@@ -10,7 +10,11 @@ import {
 } from "@/components/ui/select";
 import { Product } from "@/types/product";
 import { toast } from "@/hooks/use-toast";
-import curtainImage from "@/assets/curtain-product.jpg";
+import curtain100 from "@/assets/curtain-100cm.jpg";
+import curtain150 from "@/assets/curtain-150cm.jpg";
+import curtain200 from "@/assets/curtain-200cm.jpg";
+import curtain250 from "@/assets/curtain-250cm.jpg";
+import curtain300 from "@/assets/curtain-300cm.jpg";
 
 interface ProductDetailPageProps {
   product: Product;
@@ -21,6 +25,16 @@ export const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
   const [selectedDrop, setSelectedDrop] = useState<string | null>(null);
   const [calculatedPrice, setCalculatedPrice] = useState<number>(0);
   const [fabricPanels, setFabricPanels] = useState<number>(0);
+  const [currentImage, setCurrentImage] = useState<string>(curtain100);
+  const [isImageTransitioning, setIsImageTransitioning] = useState(false);
+
+  const imageMap: Record<string, string> = {
+    "/src/assets/curtain-100cm.jpg": curtain100,
+    "/src/assets/curtain-150cm.jpg": curtain150,
+    "/src/assets/curtain-200cm.jpg": curtain200,
+    "/src/assets/curtain-250cm.jpg": curtain250,
+    "/src/assets/curtain-300cm.jpg": curtain300,
+  };
 
   useEffect(() => {
     if (selectedWidth !== null && selectedDrop !== null) {
@@ -35,6 +49,16 @@ export const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
         const totalPrice = pricingEntry.basePrice + dropOption.priceModifier;
         setCalculatedPrice(totalPrice);
         setFabricPanels(pricingEntry.fabricPanels);
+        
+        // Update image with smooth transition
+        const newImage = imageMap[pricingEntry.image];
+        if (newImage && newImage !== currentImage) {
+          setIsImageTransitioning(true);
+          setTimeout(() => {
+            setCurrentImage(newImage);
+            setTimeout(() => setIsImageTransitioning(false), 50);
+          }, 150);
+        }
       }
     }
   }, [selectedWidth, selectedDrop, product]);
@@ -62,9 +86,11 @@ export const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
         <div className="sticky top-8">
           <div className="aspect-square overflow-hidden rounded-lg border border-border bg-muted">
             <img 
-              src={curtainImage} 
+              src={currentImage} 
               alt={product.title}
-              className="w-full h-full object-cover"
+              className={`w-full h-full object-cover transition-opacity duration-300 ${
+                isImageTransitioning ? "opacity-0" : "opacity-100"
+              }`}
             />
           </div>
         </div>

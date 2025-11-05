@@ -9,6 +9,7 @@ export interface MetafieldPricing {
   width: number;
   fabricPanels: number;
   basePrice: number;
+  image: string;
 }
 
 export interface Product {
